@@ -8,6 +8,12 @@ from models.ml_xgboost import MLXGBoostClassifier
 import pandas as pd
 
 def train_team_model(df):
+    """
+    Train Team Model creates an interactive menu and
+    calling the models according to user selection
+    Param df: Takes a Data Frame to be applied on the model
+    Returns: Returns the machine learning model selected by the user
+    """
     model = None
     X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=['Result']), df['Result'],
                                                         test_size=0.2,
@@ -50,8 +56,11 @@ def train_team_model(df):
     return model
 
 
-def main():
-
+def menu():
+    """
+    Creates an interactive menu so the user can select
+    Return: Nothing is returned only menu is printed
+    """
     # Read data and drop redundant column
     data = pd.read_excel('data/Teams.xlsx')
 
@@ -124,7 +133,8 @@ def main():
         else:
             print('No valid option was selected please try again')
 
-
+def main():
+    menu()
 if __name__ == '__main__':
     main()
 
