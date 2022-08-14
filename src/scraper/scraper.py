@@ -5,15 +5,30 @@ import time
 
 
 class Scrapper:
+    """
+    This class will provide the scraping of the data
+    """
     def __init__(self, url, excel_file_path):
+        """
+        This contructor has two parameters
+        Param url: specific webpage link thar is used to scrape the data
+        Param excel_file_path: location of the data on the computer
+        """
         self.url = url
         self.excel_file_path = excel_file_path
 
     def _export_data(self, data):
+        """
+        Transforms the data frame into an excel file
+        Param data: That is the pandas dataframe that is scrapped from the webpage
+        """
         df = pd.DataFrame(data)
         df.to_excel(self.excel_file_path)
 
     def get_data(self):
+        """
+        The module has the function to parse the webpage and clear the data.
+        """
         response = requests.get(self.url)
         soup = BeautifulSoup(response.text, features="lxml")
         standings_table = soup.select('table.stats_table')[0]
